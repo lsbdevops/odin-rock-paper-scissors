@@ -11,6 +11,7 @@ function getComputerChoice() {
     return choicesArray[randomNumber];
 }
 
+// Function that takes the player's and the computer's selection as inputs and outputs the winner of the round.
 function playRound(playerSelection, computerSelection) {
     // To ensure case-insensitivity, convert the string stored in the playerSelection variable to lower case.
     playerSelection = playerSelection.toLowerCase();
@@ -27,3 +28,16 @@ function playRound(playerSelection, computerSelection) {
     else return "Draw!";
 }
 
+// Function that plays a game of rock, paper, scissors by getting the user input and playing a round.
+function game() {
+    // Prompt the user for their choice of rock, paper or scissors and store in a variable.
+    const playerChoice = prompt("Rock, paper or scissors?");
+
+    // Call the playRound function with inputs of the user's choice variable and output of the getComputerChoice function.
+    console.log(playRound(playerChoice, getComputerChoice()));
+}
+
+// Play 5 games by using a for loop.
+for (let i = 0; i < 5; i++) {
+    game();
+}
