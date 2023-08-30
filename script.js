@@ -1,4 +1,3 @@
-
 // Function that randomly picks 'rock', 'paper' or 'scissors' and returns the selection.
 function getComputerChoice() {
     // Store a random number in a variable (integer between 0 - 2).
@@ -37,7 +36,3 @@ function game() {
     console.log(playRound(playerChoice, getComputerChoice()));
 }
 
-// Play 5 games by using a for loop.
-for (let i = 0; i < 5; i++) {
-    game();
-}
