@@ -23,14 +23,14 @@ function playRound(playerSelection, computerSelection) {
         ((playerSelection === "scissors") && (computerSelection === "paper")) ||
         ((playerSelection === "paper") && (computerSelection === "rock")))
     {
-    result.result = `You win! ${playerSelection} beats ${computerSelection}.`;
+    result.result = `You win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}.`;
     result.winner = "player";
     }
     else if (((playerSelection === "rock") && (computerSelection === "paper")) ||
         ((playerSelection === "scissors") && (computerSelection === "rock")) ||
         ((playerSelection === "paper") && (computerSelection === "scissors")))
     {
-    result.result = `You Lose! ${playerSelection} beats ${computerSelection}.`;
+    result.result = `You Lose! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}.`;
     result.winner = "computer";
     }
     // If no win conditions are met, then the results is a draw.
@@ -40,6 +40,45 @@ function playRound(playerSelection, computerSelection) {
     };
 
     return result;
+}
+
+function scoreUpdate(roundWinner) {
+    // Check the winner and get the appropriate score element.
+    const scoreElement = (roundWinner === "player") ?  document.querySelector("#players-score")
+    : (roundWinner === "computer") ? document.querySelector("#computers-score")
+    : null;
+
+    // If a draw, do not update the score.
+    if (!scoreElement) return;
+
+    // Increment the current score by 1.
+    let score = +(scoreElement.textContent) + 1;
+    scoreElement.textContent = score;
+
+    // Return the round winner's total score.
+    return score;
+}
+
+// Checks if there is an overall winner, and if so declares the winner on the webpage.
+function isWinner(currentRoundWinner, roundWinnersScore) {
+    if (roundWinnersScore === WINNING_SCORE) {
+        const winnerElement = document.querySelector("#winner")
+        winnerElement.textContent = `${capitalize(currentRoundWinner)} wins!`
+
+        if (currentRoundWinner === "player") winnerElement.style.color = "green";
+        else winnerElement.style.color = "red";
+
+        return true;
+    }
+    
+    return false;
+}
+
+// Capital first character in a string for display/aesthetic purposes.
+function capitalize(string) {
+    const stringArray = string.split("");
+    stringArray[0] = stringArray[0].toUpperCase()
+    return stringArray.join("")
 }
 
 // Function that plays a game of rock, paper, scissors by getting the user input and playing a round.
@@ -52,36 +91,19 @@ function game(event) {
     const resultElement = document.querySelector("#result")
     const result = playRound(playerChoice, getComputerChoice())
     resultElement.textContent = "Round result: " + result.result;
+    if (result.winner === "player") resultElement.style.color = "green";
+    else if (result.winner === "computer") resultElement.style.color = "red";
+    else resultElement.style.color = "black";
 
-    // Update the score and check if there's an overall winner.
-    if (scoreUpdate(result.winner))
-    {
-        document.querySelector("#winner").textContent = `${result.winner} wins!`
+    // Update the score and check if there's an overall winner. If so, end the game by disabling event listeners.
+    if (isWinner(result.winner, scoreUpdate(result.winner))) {
         buttons.forEach((button) => {
             button.removeEventListener("click", game);
          })
     }
-    else return;
 }
 
-function scoreUpdate(winner) {
-    // Check the winner and get the appropriate score element.
-    const scoreElement = (winner === "player") ?  document.querySelector("#players-score")
-    : (winner === "computer") ? document.querySelector("#computers-score")
-    : null;
-
-    // If a draw, do not update the score.
-    if (!scoreElement) return;
-
-    // Increment the current score by 1.
-    let score = +(scoreElement.textContent) + 1;
-    scoreElement.textContent = score;
-
-    // Check for a winner.
-    if (score === WINNING_SCORE) return true;
-    else return false;
-}
-
+// Declare a constant variable for the score which results in an overall winner (i.e., first to *number score*).
 const WINNING_SCORE = 5;
 
 // Add an event listener to all buttons, and run game function when clicked.
