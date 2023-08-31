@@ -4,6 +4,26 @@
     <head>
         <meta charset="UTF-8">
         <title>Rock Paper Scissors</title>
-        <script src="./script.js"></script>
+        <link href="./style.css" rel="stylesheet">
+        <script src="./script.js" defer></script>
     </head>
+    <body>
+        <div class="wrapper">
+            <h1>Rock, Paper, Scissors!</h1>
+            <h3>Click on your choice below to play:</h3>
+            <div class="btn-container">
+                <button id="rock">Rock</button>
+                <button id="paper">Paper</button>
+                <button id="scissors">Scissors</button>
+            </div>
+            <div class="result-container">
+                <p id="result">Round result:</p>
+            </div>
+            <div class="scores-container">
+                <div class="score-container">Your score: <span id="players-score">0</span></div>
+                <div class="score-container">Computer's score: <span id="computers-score">0</span></div>
+            </div>
+            <div id="winner"></div>
+        </div>
+    </body>
 </html>
