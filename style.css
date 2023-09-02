@@ -1,3 +1,8 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: azure;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -8,9 +13,46 @@
 .btn-container {
     display: flex;
     justify-content: space-evenly;
+    padding: 18px;
     min-width: 50vw;
 }
 
 button {
+    border: none;
+    padding: 8px 20px;
+    margin: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    width: 10em;
+    border-radius: 12px;
+    background-color: blanchedalmond;
+}
 
+button:hover {
+    cursor: pointer;
+    background-color: cornflowerblue;
+}
+
+.header1-container, .header3-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100vw;
+}
+
+.header1-container {
+    background-color: aliceblue;
+}
+
+.header3-container {
+    background-color: lightblue;
+}
+
+.scores-container > div {
+    padding: 4px;
+}
+
+#winner {
+    font-size: 18px;
+    padding: 12px;
 }
